@@ -25,18 +25,23 @@ function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
 // create a storage array to push new array into
 
-    var storage = []; 
+var storage = []
 
-// start for loop to iterate through array
-  
+// use if statements to check if parameters are greater or less than each other
 
-
-    
-    
+if (start > end){
+    for (var start = 0; start <= end; start++){
+        storage.push(start)
+       
+    }  return storage;
+} else {
+    for (var )
+}
+}
     
     
     // YOUR CODE GOES ABOVE HERE //
-}
+
 
 
 
