@@ -29,13 +29,19 @@ var storage = []
 
 // use if statements to check if parameters are greater or less than each other
 
-if (start > end){
-    for (var start = 0; start <= end; start++){
-        storage.push(start)
+if (start < end){ //if start param is < than end param 
+    // use for loop to iterate through the range and print the numbers from start to end starting
+    // with start
+    for (var i = start; i <= end ; i++){
+        // push the integers into storage array
+        storage.push(i);
        
-    }  return storage;
-} else {
-    for (var )
+    }  return storage; //return array
+} else if (start > end){ // if start param is > than end param
+    // use for loop to iterate through the range and print the items in reverse, starting from start
+    for (var i = start; i >= end; i--){ 
+        storage.push(i); // push integers into storage array
+    } return storage; // return array
 }
 }
     
