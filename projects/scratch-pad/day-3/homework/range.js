@@ -23,6 +23,14 @@
  */
 function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
+// create a storage array to push new array into
+
+    var storage = []; 
+
+// start for loop to iterate through array
+  
+
+
     
     
     
