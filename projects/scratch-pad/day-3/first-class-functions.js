@@ -13,7 +13,14 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+     return function(value){
+        if (typeof base == "string" || typeof value == "number"){
+            return value > base
+        } else {
+            return Number(value) > Number(base);
+        }
+     }
+
     
     
     
@@ -27,7 +34,13 @@ function createGreaterThanFilter(base) {
  */
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+    return function(value){
+        if (typeof base == "string" || typeof value == "number"){
+            return value < base
+        } else {
+            return Number(value) <  Number(base);
+        }
+     }
     
     
     
@@ -41,8 +54,13 @@ function createLessThanFilter(base) {
  */
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
-    
-    
+    //convert startsWith character to lower case
+    startsWith = startsWith.toLowerCase();
+// convert first character of str to lowercase for comparison
+    return function(str){
+        var firstChar = str.charAt(0).toLowerCase(); //set first character of string to lowercase
+        return firstChar === startsWith;
+    }
     
     
     // YOUR CODE ABOVE HERE //
@@ -55,7 +73,13 @@ function createStartsWithFilter(startsWith) {
  */
 function createEndsWithFilter(endsWith) {
     // YOUR CODE BELOW HERE //
-    
+    // convert endsWith to lowercase
+    endsWith = endsWith.toLowerCase();
+ // convert the last character of endsWith to lowercase for comparison
+    return function(str){
+        var lastChar = str.slice(-1).toLowerCase();  // use slice method to access last character in string
+        return lastChar === endsWith;
+    }
     
     
     
@@ -71,10 +95,14 @@ function createEndsWithFilter(endsWith) {
  */
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
+ 
+    var newStrings = []; // create storage array for modified strings to be pushed into
     
-    
-    
-    
+    for (var i = 0; i < strings.length; i++){
+        var modifiedString = modify(strings[i]);
+        newStrings.push(modifiedString);
+    }
+    return newStrings;
     // YOUR CODE ABOVE HERE //
 }
 
