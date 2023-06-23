@@ -110,7 +110,7 @@ function modifyStrings(strings, modify) {
  * Given an Array of Strings and a Function designed to test the String in some 
  * way and return a Boolean on whether it passed, return true if ALL Strings pass the test.
  * 
- * Imagine you had a list of names, and you wanted to test they all 
+ * Imagine you had a list of names, and you wanted to test if they all 
  * begin with "C", or they are all exclaimations that end with "!".
  * 
  * TIP: You need to loop over the Strings, right? And pass them to the test?
@@ -118,8 +118,16 @@ function modifyStrings(strings, modify) {
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
     
+
+    for (var i = 0; i < strings.length; i ++){
+        if (!test(strings[i])) { // If any string fails the test
+            return false; // Return false immediately
+        }
+    }
     
+    return true; // All strings pass the test
     
+    return updatedStrings;
     
     // YOUR CODE ABOVE HERE //
 }
