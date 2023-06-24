@@ -56,11 +56,12 @@ function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
     //convert startsWith character to lower case
     startsWith = startsWith.toLowerCase();
-// convert first character of str to lowercase for comparison
+
     return function(str){
-        var firstChar = str.charAt(0).toLowerCase(); //set first character of string to lowercase
-        return firstChar === startsWith;
+      var firstChar = str[0].toLowerCase();
+      return firstChar === startsWith;
     }
+    
     
     
     // YOUR CODE ABOVE HERE //
@@ -77,7 +78,7 @@ function createEndsWithFilter(endsWith) {
     endsWith = endsWith.toLowerCase();
  // convert the last character of endsWith to lowercase for comparison
     return function(str){
-        var lastChar = str.slice(-1).toLowerCase();  // use slice method to access last character in string
+        var lastChar = str[str.length-1].toLowerCase();  // storing the last character in 
         return lastChar === endsWith;
     }
     
@@ -96,13 +97,16 @@ function createEndsWithFilter(endsWith) {
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
  
-    var newStrings = []; // create storage array for modified strings to be pushed into
-    
-    for (var i = 0; i < strings.length; i++){
-        var modifiedString = modify(strings[i]);
-        newStrings.push(modifiedString);
+    // storage array for modified strings
+    var modStrings = [];
+    // loop through the strings
+    for (var i = 0; i <= strings.length -1; i++){
+        // create a temporary variable to hold the modified strings
+        var temp = modify(strings[i]);
+        // push modified strings into empty array
+        modStrings.push(temp);
     }
-    return newStrings;
+    return modStrings;
     // YOUR CODE ABOVE HERE //
 }
 

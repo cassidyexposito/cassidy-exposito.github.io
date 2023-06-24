@@ -23,7 +23,7 @@
  *         the contact-list.
  *      5. add a printAllContactNames() Function to your makeContactList() factory. The printAllContactNames() Function should 
  *         return a String formated with all the full-names of the separated 
- *         with a line-break, like so:
+ *         with a line-break, like so: 
  *          
  *         myContacts.printAllContactNames(); // => Max Gaudin
  *                                                  John Fraboni
@@ -35,7 +35,12 @@
 
 // YOUR CODE GOES BELOW HERE //
 function makeContact(id, nameFirst, nameLast) {
-
+    var obj = {
+        id: id,
+        nameFirst: nameFirst,
+        nameLast: nameLast,
+    }
+    return obj;
 } 
 
 
@@ -43,14 +48,51 @@ function makeContactList() {
     /*
      * You need something here to hold contacts. See length api for a hint:
      */
-    var contacts;
+    var contacts = [];
     
-    return {
+    var obj = {
         // we implemented the length api for you //
         length: function() {
             return contacts.length;
+        },
+        addContact: function(contact){
+            contacts.push(contact);
+        },
+        findContact: function(fullName) {
+            for (var i = 0; i <= contacts.length - 1; i++){
+                if (contacts[i].fullName === fullName) {
+                    return contacts[i];
+                }
+            }
+            return undefined;
+        },
+        removeContact: function(contact){
+            // Stores the index of the contact in our contacts array
+            var index = 0;
+
+            // Loop through contacts array, and if the contact's full name is equal to the 
+            // full name of our contact parameter, store its index in the index variable
+            for (var i = 0; i <= contacts.length - 1; i++){
+                if(contacts[i].fullName === contact.fullName){
+                    index = i
+                }
+            } 
+            contacts.splice(index, 1);
+        },
+        printAllContactNames: function(){
+            var str = "";
+
+            for(var i = 0; i <= contacts.length - 1; i++){
+               str += contacts[i].fullName;
+                if (i != contacts.length - 1) {
+                    str += "\n";
+                }
+            }
+            return str;
         }
     }
+
+    return obj;
 }
 
 
