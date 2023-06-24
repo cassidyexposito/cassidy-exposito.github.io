@@ -60,7 +60,8 @@ function makeContactList() {
         },
         findContact: function(fullName) {
             for (var i = 0; i <= contacts.length - 1; i++){
-                if (contacts[i].fullName === fullName) {
+                var contactFullName = contacts[i].nameFirst + " " + contacts[i].nameLast
+                if (contactFullName === fullName) {
                     return contacts[i];
                 }
             }
@@ -73,7 +74,8 @@ function makeContactList() {
             // Loop through contacts array, and if the contact's full name is equal to the 
             // full name of our contact parameter, store its index in the index variable
             for (var i = 0; i <= contacts.length - 1; i++){
-                if(contacts[i].fullName === contact.fullName){
+                var contactFullName = contacts[i].nameFirst + " " + contacts[i].nameLast
+                if(contactFullName === contact.fullName){
                     index = i
                 }
             } 
@@ -83,7 +85,8 @@ function makeContactList() {
             var str = "";
 
             for(var i = 0; i <= contacts.length - 1; i++){
-               str += contacts[i].fullName;
+                var contactFullName = contacts[i].nameFirst + " " + contacts[i].nameLast
+                str += contactFullName
                 if (i != contacts.length - 1) {
                     str += "\n";
                 }
