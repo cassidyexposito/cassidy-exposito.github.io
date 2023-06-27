@@ -35,7 +35,7 @@ test *= 5 //to update the value of test to 75
 
 // /= //division shortcut
 
-/  instead of 
+//  instead of 
 test = test / 5
 //  we can write 
 test /= 5 //to update the value of test to 3
@@ -43,7 +43,7 @@ test /= 5 //to update the value of test to 3
 
 // %= // modulus shortcut 
 
-/  instead of 
+//  instead of 
 test = test % 5
 //  we can write 
 test  %= 5 //to update the value of test to 0
