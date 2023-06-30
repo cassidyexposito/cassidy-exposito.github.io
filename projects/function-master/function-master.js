@@ -26,7 +26,12 @@ function keysToString(object) {
 //Should take an object and return all its string values in a string each separated with a space
 
 function valuesToString(object) {
-  
+    let string = []; // create array to return new strings into
+    for (let key in object) { // use for in loop to go through object
+       if (typeof object[key] === "string") // determine if keys in object are strings using typeOf
+    string.push(object[key]); //push strings into storage array
+    }
+       return string.join(" ");  //separate them with a space
     
 }
 
@@ -99,11 +104,12 @@ function profileInfo(object) {
 //if there are no noises return 'there are no noises'"
 
 function maybeNoises(object) {
-    
-    if (object.noises && Array.isArray(object.noises) && object.noises.length > 0) {
-        return object.noises.join(" ");
+     // we know there is a noises array in our object so we need to check if it's an array and if 
+     // it has any elements by checking it's length
+    if (Array.isArray(object.noises) && object.noises.length > 0) {
+        return object.noises.join(" "); // separate the elements in the array with a space
     } else {
-        return "there are no noises";
+        return "there are no noises"; // return there are no noises if there arent any
     }
 }
 
@@ -128,31 +134,47 @@ function hasWord(string, word) {
 //////////////////////////////////////////////////////////////////////
 // Function 11 - Add Friend //////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-
+//Should take a name and an object and add the name to the object's friends array then return the object
 function addFriend (name, object) {
-
+   
+    object.friends.push(name);
+    return object;
 }
+
+
+   
+
 
 //////////////////////////////////////////////////////////////////////
 // Function 12 - Is Friend ///////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//Should take a name and an object and return true if <name> is a friend of <object> and false otherwise
 
 function isFriend(name, object) {
-
+// use for in loop to search through object 
+    for(var key in object){ 
+        if(object.name === object.friend){
+            return true;
+        }
+    } return false;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 13 - Non-Friends /////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+//Should take a name and a list of people, and return a list of all the names that <name> is not friends with
 
 function nonFriends(name, array) {
 
+    
 }
+
 
 //////////////////////////////////////////////////////////////////////
 // Function 14 - Update Object ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
-
+//Should take an object, a key and a value. Should update the property <key> on <object> 
+//with new <value>. If <key> does not exist on <object> create it
 function updateObject(object, key, value) {
 
 }
