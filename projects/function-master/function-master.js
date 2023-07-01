@@ -151,12 +151,18 @@ function addFriend (name, object) {
 //Should take a name and an object and return true if <name> is a friend of <object> and false otherwise
 
 function isFriend(name, object) {
-// use for in loop to search through object 
-    for(var key in object){ 
-        if(object.name === object.friend){
+    //does this object have the friend key?
+    //if it doesn't have the friends property then it has no friends
+    // so it wouldn't be in friends
+    if (!object.hasOwnProperty("friends")) {
+        return false;
+      }
+    for(let i = 0; i < object.friends.length; i++){ //loop through object.friends to find friends name
+        if(name === object.friends[i]){ //if the name is in the friens object return true
             return true;
         }
-    } return false;
+    }
+    return false;
 }
 
 //////////////////////////////////////////////////////////////////////
@@ -165,8 +171,23 @@ function isFriend(name, object) {
 //Should take a name and a list of people, and return a list of all the names that <name> is not friends with
 
 function nonFriends(name, array) {
+    // Creating a list to hold all people who aren't friends of "name"
+    let newList = [];
 
-    
+    // Loop through the array (the list of people)
+    for (let i = 0; i < array.length; i++) {
+        // Skip this iteration of the loop if this person's name is the same as "name", we don't want to check their own friends list
+        if (array[i].name === name) {
+            continue;
+        }
+        // If this person's friends does not include the name
+        if (!array[i].friends.includes(name)) {
+            // Push the name of this person into the list
+            newList.push(array[i].name);
+        }
+    }
+    // return the list
+    return newList;
 }
 
 
