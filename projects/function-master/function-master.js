@@ -172,49 +172,62 @@ function isFriend(name, object) {
 
 function nonFriends(name, array) {
     // Creating a list to hold all people who aren't friends of "name"
-    let newList = [];
+   let notFriends = [];
 
     // Loop through the array (the list of people)
-    for (let i = 0; i < array.length; i++) {
-        // Skip this iteration of the loop if this person's name is the same as "name", we don't want to check their own friends list
-        if (array[i].name === name) {
-            continue;
-        }
+    for(var i = 0; i < array.length; i++){
+        if(name === array[i].name){
+            continue; 
+        } // Skip this iteration of the loop if this person's name is the same as "name", we don't want to check their own friends list
         // If this person's friends does not include the name
-        if (!array[i].friends.includes(name)) {
-            // Push the name of this person into the list
-            newList.push(array[i].name);
+        if(!array[i].friends.includes(name)){
+            notFriends.push(array[i].name); // Push the name of this person into the list
         }
-    }
-    // return the list
-    return newList;
+    }  return notFriends;
+   
+       // return the list
+        
 }
 
 
 //////////////////////////////////////////////////////////////////////
 // Function 14 - Update Object ///////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+
 //Should take an object, a key and a value. Should update the property <key> on <object> 
 //with new <value>. If <key> does not exist on <object> create it
-function updateObject(object, key, value) {
 
+function updateObject(object, key, value) {
+    object[key] = value;
+  return object;
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 15 - Remove Properties ///////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 
-function removeProperties(object, array) {
+// Should take an object and an array of strings.
+// Should remove any properties on <object> that are listed in <array>"
 
+function removeProperties(object, array) {
+// loop through the array of strings
+    for(let i = 0; i < array.length; i++){
+        if(object.hasOwnProperty(array[i])){ //if property exists in this object
+            delete object[array[i]]; //delete the property
+        }
+    }
 }
 
 //////////////////////////////////////////////////////////////////////
 // Function 16 - Dedup ///////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
+// Should take an array and return an array with all the duplicates removed"
 
 function dedup(array) {
-
+    let unique = [...new Set(array)];
+    return unique;
 }
+
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
