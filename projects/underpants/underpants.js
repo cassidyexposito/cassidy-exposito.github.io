@@ -3,6 +3,8 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode
 
 
+
+
 var _ = {};
 
 
@@ -181,9 +183,9 @@ _.contains = function(array, value){
 
 _.each = function(collection, func){
     if (Array.isArray(collection)){
-    for(var i = 0; i < collection.length; i++){
-        func(collection[i], i, collection)
-    }
+        for(var i = 0; i < collection.length; i++){
+            func(collection[i], i, collection)
+        }
     } else if (typeof(collection) === "object"){
         for(var key in collection){
             func(collection[key], key, collection)
@@ -251,6 +253,15 @@ _.filter = function(array, func){
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
 
+_.reject = function(array, func){
+    let storage = [];
+    for(var i = 0; i < array.length; i++){
+        if (func(array[i], i, array) === false) {
+            storage.push(array[i]);
+        }
+    }
+    return storage;
+}
 
 /** _.partition
 * Arguments:
@@ -272,6 +283,23 @@ _.filter = function(array, func){
 */
 
 
+_.partition = function(array, func){
+    let truthyArr = [];
+    let falseyArr = [];
+    for(var i = 0; i < array.length; i++){
+        if(func(array[i], i, array) === true){
+            truthyArr.push(array[i]);
+        }  else if (func(array[i], i, array) === false){
+            falseyArr.push(array[i]);
+        }
+    }
+
+    return [truthyArr, falseyArr];
+}
+            
+        
+
+
 /** _.map
 * Arguments:
 *   1) A collection
@@ -286,7 +314,26 @@ _.filter = function(array, func){
 *   3) return the new array
 * Examples:
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
+
+*   _.map([{a: "one"}, {a: "two"}], function(obj) {return obj[property];}  ) --> ["one", "two"];
+
+*  _.map([5, 6, 7, 8, 9], function(num) {return num + 5}); --> [10, 11, 12, 13, 14];
 */
+
+
+_.map = function(collection, func){
+    let newArr = [];
+    if(Array.isArray(collection)){
+        for(var i = 0; i < collection.length; i++){
+            newArr.push(func(collection[i], i, collection));
+        }
+    } else if (typeof(collection) === "object"){
+        for(var key in collection){
+            newArr.push(func(collection[key], key, collection));
+        }
+    }
+    return newArr;
+}
 
 
 /** _.pluck
@@ -300,6 +347,11 @@ _.filter = function(array, func){
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
 
+_.pluck = function(array, property){
+    let result = _.map(array, function(obj) {return obj[property];});
+
+    return result;
+}
 
 /** _.every
 * Arguments:
@@ -329,14 +381,15 @@ _.every = function(collection, func) {
     if (Array.isArray(collection)) {
         //determine if function wasn't provided
         if (func === undefined) {
+            // Loop through the array, and return false if any number is 0 (returning false for falsy values)
             for (let i = 0; i < collection.length; i++) {
-                if (!collection[i]){
+                if (collection[i] === 0) {
                     return false;
                 }
             }
         } else { //else it was
             for (let i = 0; i < collection.length; i++) {
-                if (!func(collection[i], i, collection)) { //if result of invoking is falsey
+                if (func(collection[i], i, collection) === false) { //if result of invoking is falsey
                     return false;
                 }
             }
@@ -376,6 +429,33 @@ _.every = function(collection, func) {
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function(collection, func){
+    if (Array.isArray(collection)){ 
+        if (func === undefined){
+            for(var i = 0; i < collection.length; i++){
+                if(collection[i] !== 0 && collection[i] !== null && collection[i] !== false && collection[i] !== ""){
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        }  
+        for (var i = 0; i < collection.length; i++){
+            if (func(collection[i], i, collection) === true){
+                return true;
+            } 
+        }
+    } else if (typeof(collection) === "object"){
+        for (var key in collection){
+            if (func(collection[key], key, collection) === true){
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
 
 /** _.reduce
 * Arguments:
@@ -395,6 +475,57 @@ _.every = function(collection, func) {
 * Examples:
 *   _.reduce([1,2,3], function(previousSum, currentValue, currentIndex){ return previousSum + currentValue }, 0) -> 6
 */
+
+
+// seed = 10
+// array = [1, 2, 3, 4, 5]
+// _.reduce --->  array = [11, 12, 13, 14, 15]
+
+// seed = 5
+// array = [1, 2, 3]
+// after reduce ---> [6, 7, 8]
+
+// seed = ???
+// array = [4, 5, 6]
+// use the first value of array as the seed;  seed = 4
+// ._reduce -->  [4, 9, 10];  (didnt operate on 4, because he's the seed)
+
+_.reduce = function(array, func, seed){
+    // Variable that will hold the starting index of our loop
+    let start;
+
+    // If seed is undefined, let seed be the first element of the array
+    if (seed === undefined){
+        seed = array[0];
+        // Since seed is now the first element, we want to start our loop later at index 1
+        start = 1;
+    }
+    else {
+        // If seed is known however, we'll want to start our loop at index 0
+        start = 0;
+    }
+
+    // Initialize prevResult as the seed, which will be used for the first iteration of the loop (step 3)
+    let prevResult = seed;
+
+    // Begin looping through our array
+    for (var i = start; i < array.length; i++){
+        // Call the function, and store its result in prevResult (prevResult will be overwritten every loop)
+       prevResult = func(prevResult, array[i], i);
+    }
+
+    // Return prevResult (the final result from the last time the loop ran); the value of the final function call
+    return prevResult;
+}
+
+// function() {
+//     // handle the edge cases first
+
+
+//     // actual code
+// }
+
+
 
 
 /** _.extend
