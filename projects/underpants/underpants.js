@@ -111,13 +111,13 @@ _.first = function(array, number){
 _.last = function(array, number){
     if(!Array.isArray(array) || number < 0){
         return [];
-    } else if(typeof(number) !== "number" || number === null) {
+    } if(typeof(number) !== "number"){
         return array.pop();
-    } else if (number > array.length){
+    } if(number > array.length){
         return array;
     }
     return array.slice(-number);
-}
+} 
 
 
 /** _.indexOf
@@ -137,12 +137,12 @@ _.last = function(array, number){
 */
 
 _.indexOf = function(array, value){
-    for(var i = 0; i < array.length; i++){
+    for (let i = 0; i < array.length; i++){
         if(array[i] === value){
             return i;
         }
     }
-return -1;
+    return -1;
 }
 
 /** _.contains
@@ -161,7 +161,7 @@ return -1;
 */
 
 _.contains = function(array, value){
-    return array.includes(value) ? true : false;
+   return (array.includes(value) ? true : false)
 };
 
 /** _.each
@@ -203,15 +203,15 @@ _.each = function(collection, func){
 *   _.unique([1,2,2,4,5,6,5,2]) -> [1,2,4,5,6]
 */
 
-_.unique = function(array){
-    let newArray = []; // create storage array for elements with no duplicates to be pushed into
-    for(var i = 0; i < array.length; i++){ // loop through the array and duplicates
-        if(_.indexOf(newArray, array[i]) === -1){ // call indexOf from above, using storage aray as param1, and the index of the array we just looped through as param2.
-            newArray.push(array[i]);              // set it strictly equal to -1, because when indexOf returns -1 when the value wasn't found in the array
+_.unique = function(arr){
+    let storage = [];
+    for(let i = 0; i < arr.length; i++){
+        if(_.indexOf(storage, arr[i]) === -1){
+            storage.push(arr[i]);
         }
-    }return newArray;
-} 
-
+    }
+    return storage;
+}
 
 /** _.filter
 * Arguments:
@@ -229,16 +229,17 @@ _.unique = function(array){
 *   use _.each in your implementation
 */
 
-
-_.filter = function(array, func){
-    let storage = [];
-    for(var i = 0; i < array.length; i++){
-       if (func(array[i], i, array) === true){
-         storage.push(array[i]);
+_.filter = function(arr, func){
+    let storageArr = [];
+    for(let i = 0; i < arr.length; i++){
+       if (func(arr[i], i, arr) === true){
+        storageArr.push(arr[i]);
        }
     }
-    return storage;
+    return storageArr;
 }
+
+
 
 /** _.reject
 * Arguments:
@@ -543,6 +544,25 @@ _.reduce = function(array, func, seed){
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
+ _.extend = function (obj1, obj2, ...moreObjects) {
+    // Copy properties from obj2 to obj1
+    for (var key in obj2) {
+      obj1[key] = obj2[key];
+    }
+  
+    // If more objects are passed in, copy their properties to obj1 as well
+    if (moreObjects.length > 0) {
+      for (var i = 0; i < moreObjects.length; i++) {
+        var obj = moreObjects[i];
+        for (var key in obj) {
+          obj1[key] = obj[key];
+        }
+      }
+    }
+  
+    // Return the updated obj1
+    return obj1;
+  }
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
