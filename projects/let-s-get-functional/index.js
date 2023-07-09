@@ -22,21 +22,65 @@ var _ = require('underbar');
  */
 // map , filter , reduce , each
 
-var maleCount = function(array) {
-let males = _.filter(array, function(customer){
-    return customer.gender === "male";
+function getMales(customer){
+    if(customer.gender === "male"){
+        return true;
+    }
+    return false;
 }
-)};
 
-var femaleCount;
+var maleCount = function(array){
+    let filteredArray = _.filter(array, getMales);
+    return filteredArray.length;
+}; 
 
-var oldestCustomer;
 
-var youngestCustomer;
+function getFemales(customer){
+    if(customer.gender === "female"){
+        return true;
+    }
+    return false;
+}
+
+var femaleCount = function(array){
+    let filteredArray = _.filter(array, getFemales);
+    return filteredArray.length;
+}
+
+var oldestCustomer = function(array){
+    let oldestCustomer = array[0];
+
+    for(let i = 0; i < array.length; i++){
+        if(array[i].age > array[0].age){
+            oldestCustomer = array[i];
+        }
+    }
+    return oldestCustomer.name;
+}
+
+var youngestCustomer = function(array){
+    let youngestCustomer = array[0];
+
+    for(let i = 0; i < array.length; i++){
+        if(array[i].age < array[0].age){
+            youngestCustomer = array[i];
+        }
+    }
+    return youngestCustomer.name;
+}
 // skip average balance 
 var averageBalance;
 
-var firstLetterCount;
+var firstLetterCount = function(array, letter){
+    let count = 0;
+
+    for(let i = 0; i < array.length; i++){
+        if(array[i].name[0].toLowerCase() === letter.toLowerCase()){
+           count++;
+        }
+    }
+    return count;
+}
 
 var friendFirstLetterCount;
 
