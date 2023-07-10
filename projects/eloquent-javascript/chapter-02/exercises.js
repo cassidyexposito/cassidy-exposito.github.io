@@ -4,12 +4,13 @@
 ////////////////////////////////////////////////////////////////////////////////
 
 function triangles(count) {
-  let triangle = "#";
-  let count = 0;
+  let triangle = "";
+
   for (let i = 0; i < count; i++) {
-    count = triangle + "#"
-  } console.log(triangle);
-}
+    triangle =  triangle + "#";
+    console.log(triangle);
+  } 
+ }
 ////////////////////////////////////////////////////////////////////////////////
 // fizzBuzz ////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +18,7 @@ function triangles(count) {
 function fizzBuzz() {
   for(let i = 1; i <= 15; i++){
     if(i % 3 === 0 && i % 5 === 0) {
-      console.log("fizzbuzz");
+      console.log("fizzbuzz"); 
     } else if(i % 3 === 0) {
       console.log("fizz");
     } else if(i % 5 === 0) {

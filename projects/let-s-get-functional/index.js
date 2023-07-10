@@ -51,7 +51,7 @@ var oldestCustomer = function(array){
     let oldestCustomer = array[0];
 
     for(let i = 0; i < array.length; i++){
-        if(array[i].age > array[0].age){
+        if(array[i].age > oldestCustomer.age){
             oldestCustomer = array[i];
         }
     }
@@ -62,7 +62,7 @@ var youngestCustomer = function(array){
     let youngestCustomer = array[0];
 
     for(let i = 0; i < array.length; i++){
-        if(array[i].age < array[0].age){
+        if(array[i].age < youngestCustomer.age){
             youngestCustomer = array[i];
         }
     }
@@ -82,7 +82,33 @@ var firstLetterCount = function(array, letter){
     return count;
 }
 
-var friendFirstLetterCount;
+var friendFirstLetterCount = function(array, customer, letter){
+    // Array: An array of customer objects, seen in customers.json
+    // Customer: a STRING that is a customer's name
+    // Letter: the letter that we're trying to see if anyone's first letter of their name matches
+
+    // Create a variable to keep track of the number of friends that have their name start with letter
+    let numFriends = 0;
+
+    // Begin by looping through all of the customers in the array
+    for (let i = 0; i < array.length; i++) {
+        // If a customer's name matches the customer string, that means we found the customer we're looking for
+        if (array[i].name === customer) {
+            // Store the friends array of this customer into another array (optional to do this, just did it for readability)
+            let customerFriends = array[i].friends;
+            // Begin looping through the friends of this customer
+            for (let j = 0; j < customerFriends.length; j++) {
+                // If any of the friends names begins with our letter, increment numFriends (converting both toLowerCase for common ground)
+                if (customerFriends[j].name[0].toLowerCase() === letter.toLowerCase()) {
+                    numFriends++;
+                }
+            }
+        }
+    }
+
+    // return the number of friends whose names began with letter
+    return numFriends;
+}
 
 var friendsCount;
 
