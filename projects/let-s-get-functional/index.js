@@ -109,12 +109,52 @@ var friendFirstLetterCount = function(array, customer, letter){
     // return the number of friends whose names began with letter
     return numFriends;
 }
+ 
+// function getFriends(krustomer){
+//     if(krustomer.friends.includes(name)){
+//         return true;
+//     }
+//     return false;
+// }
 
-var friendsCount;
+var friendsCount = function(array, name){
+    let filteredList =  _.filter(array, function(customer) {
+        for (let i = 0; i < customer.friends.length; i++) {
+            if (customer.friends[i].name === name) {
+                return true;
+            }
+        }
+        return false;
+    });
 
-var topThreeTags;
+    // [{"Tom", "12345", "..."}, {"Gilbert", "55555", "..."];
 
-var genderCount;
+    filteredList = _.map(filteredList, function(customer) {
+        return customer.name;
+    });
+
+    // ["Tom", "Gilbert", ...];
+
+    return filteredList;
+}
+
+var topThreeTags = function(array){
+    ;
+}
+
+var genderCount = function(array) {
+   let counts = {
+    "male" : 0,
+    "female" : 0,
+    "non-binary" : 0
+   };
+
+   for(let i = 0; i < array.length; i++){
+    let customerGender = array[i].gender;
+    counts[customerGender]++
+   }
+   return counts;
+};
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////

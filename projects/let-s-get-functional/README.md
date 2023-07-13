@@ -84,14 +84,12 @@ const _ = require('lodown-oliviasaborush');
  - **Constraints**:
 
 ### 10: `genderCount`
- - **Objective**: Create a summary of genders, the output should be:
-```javascript
+ - **Objective**: Create a summary of genders, the output should be
 {
     male: 3,
     female: 4,
     non-binary: 1
 }
-```
  - **Input**: `Array`
  - **Output**: `Object`
  - **Constraints**: Use `reduce`
