@@ -68,12 +68,39 @@ return isEven(n - 2);
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
-var sumBelow = function(n) {
+var sumBelow = function(n, sum=0) {
+//base
+if(n === 0){
+  return sum;
+}
+//recursion
+if(n < 0){
+  sum += n + 1
+  return sumBelow(n + 1, sum);
+}
+
+  sum += n - 1
+
+return sumBelow(n - 1, sum);
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
-var range = function(x, y) {
+var range = function(x, y, output=[]) {
+  
+//base 
+  if(x === y || y - x === 1){
+  return output;
+}
+//recursion
+  if(x < y){
+  output.push(x + 1)
+  } 
+  if (x > y) {
+    output.push(y + 1)
+  }
+
+return range(x + 1, y, output)
 };
 
 // 7. Compute the exponent of a number.
@@ -93,6 +120,9 @@ var powerOfTwo = function(n) {
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function(string) {
+//base 
+//if(string.length === 0)
+
 };
 
 // 10. Write a function that determines if a string is a palindrome.
