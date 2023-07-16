@@ -122,31 +122,41 @@ else if(exp < 0){
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
 var powerOfTwo = function(n) {
-  //base 
-  if (n === 0){
-    return false;
-  } else if(n === 1 || n === 2){
+  if (n === 1) {
     return true;
-  };
-   //recursion
-  
+  }
+  if (n % 2 !== 0 || n === 0) {
+    return false;
+  }
   return powerOfTwo(n / 2);
-
 };
 
 // 9. Write a function that accepts a string a reverses it.
 var reverse = function(string, output=[]) {
-//base 
-if(string.length === 0){
-return output.join('');
-}; 
+  //base 
+  if(string.length === 0){
+    return output.join('');
+  }; 
 
-output.unshift(string[0]);
-return reverse(string.slice(1), output);
+  output.unshift(string[0]);
+  return reverse(string.slice(1), output);
 
 };
 // 10. Write a function that determines if a string is a palindrome.
 var palindrome = function(string) {
+  string = string.toLowerCase();
+  string = string.replaceAll(" ", "");
+
+  if(string.length === 1){
+    return true
+  };
+  if(string.length === 2){
+    return string[0] === string[1]
+  }
+  if(string[0] === string.slice(-1)){
+    return palindrome(string.slice(1,-1))
+  }
+  return false;
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -161,9 +171,16 @@ var modulo = function(x, y) {
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 var multiply = function(x, y) {
-
-
-};
+  if(x === 0 || y === 0){
+    return 0;
+  }
+  else if(y > 0){
+    return x + multiply(x, y - 1);
+  }
+  else if (y < 0){
+    return -multiply(x, -y);
+  }
+}
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
@@ -184,15 +201,38 @@ var gcd = function(x, y) {
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
 var compareStr = function(str1, str2) {
+
+  if(str1 === "" && str2 === ""){
+    return true;
+  }
+  else if(str1[0] === str2[0]){
+    return compareStr(str1.slice(1), str2.slice(1));
+  }
+ 
+  return false;
+
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
-var createArray = function(str){
+var createArray = function(str, output=[]){
+  if(str.length === 0){
+    return output;
+  }
+  output.push(str[0]);
+  return createArray(str.slice(1), output)
 };
 
 // 17. Reverse the order of an array
-var reverseArr = function (array) {
+var reverseArr = function (array, output=[]) {
+  if(array.length === 0){
+    return output;
+  }
+  output.unshift(array[0]);
+  array.shift();
+
+  return reverseArr(array, output)
+  
 };
 
 // 18. Create a new array with a given value and length.
