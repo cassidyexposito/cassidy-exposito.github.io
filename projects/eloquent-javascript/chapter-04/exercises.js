@@ -2,19 +2,29 @@
 // range ///////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-function range(start, end, step) {
+function range(start, end, step=1) {
   let array =[];
- 
-  if (step == 0) {
-    for(let i = start; i<= end; i++) {
+  if(start < end && step < 0){
+    return array;
+  }
+  if(step > 0 && start < end) {
+    for(let i = start; i <= end; i+=step) {
     array.push(i);
-  }}else if(step > 0 ) {
-    for(let i = start; i<= end; i+=step) {
-    array.push(i);
-  }} else if(step < 0) {
-    for(let i = start; i>= end; i+=step){
-  array.push(i);
-  }}
+  }} else if (step > 0 && start > end){
+    for(let i = start; i >= end; i-=step){
+      array.push(i);
+    }
+  }
+  
+  else if(step < 0 && start > end) {
+    for(let i = start; i >= end; i+=step){
+      array.push(i);
+  }} else if(step < 0 && start < end){
+    for(let i = start; i <= end; i-=step){
+      array.push(i)
+    }
+  }
+
   return array;
 
 }
