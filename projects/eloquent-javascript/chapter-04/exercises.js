@@ -57,7 +57,6 @@ function reverseArray(array) {
   backwards.unshift(array[i]);
  }
  return backwards;
- 
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -78,14 +77,13 @@ function reverseArrayInPlace(array) {
 ////////////////////////////////////////////////////////////////////////////////
 
 function arrayToList(array) {
-let rest = null;
+  let rest = null;
 
-for (let i = array.length - 1; i >= 0; i--){
-  rest = { value: array[i], rest: rest};
+  for (let i = array.length - 1; i >= 0; i--){
+    rest = { value: array[i], rest: rest};
 
-}
-return rest;
-
+  }
+  return rest;
 };
 
 ////////////////////////////////////////////////////////////////////////////////

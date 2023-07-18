@@ -68,9 +68,18 @@ var youngestCustomer = function(array){
     }
     return youngestCustomer.name;
 }
-// skip average balance 
-var averageBalance = function(array, number){
 
+var averageBalance = function(array, number){
+    let totalBalances = 0.0;
+
+    for (let i = 0; i < array.length; i++) {
+        let balance = array[i].balance;
+        balance = balance.replace(",", "");
+        balance = balance.replace("$", "");
+        totalBalances += parseFloat(balance);
+    }
+
+    return totalBalances / array.length;
 }
 
 var firstLetterCount = function(array, letter){
@@ -141,24 +150,40 @@ var friendsCount = function(array, name){
 }
 
 var topThreeTags = function(array){
-  
-    // storage object to hold top three tags
-    let countObj = {
-    
-    }
+    let storage = [];
+    // storage object to hold all tags and their counts
+    let countObj = {};
 
     for(let i = 0; i < array.length; i++){ // looping through customers array 
         for(let j = 0; j < array[i].tags.length; j++){ // looping through each customers tags array
             // use hasOwnProperty to update our empty count object with current customers tags
-            if(!countObj.HasOwnProperty(array[i].tags[j])){  // check if the tag is in the object
+            if(!countObj.hasOwnProperty(array[i].tags[j])){  // check if the tag is in the object
                 countObj[array[i].tags[j]] = 1 // 
             } else {
                 countObj[array[i].tags[j]]++ // updating count object with tags found in customers array
             }
         }
     }
-    return countObj;
+
+    while (storage.length != 3) {
+        let maxVal = 0; // Biggest value in the object
+        let biggestKey = ""; // Key corresponding to that value
+
+        for (let key in countObj) {
+            if (countObj[key] > maxVal) {
+                maxVal = countObj[key];
+                biggestKey = key;
+            }
+        }
+
+        storage.push(biggestKey);
+        delete countObj[biggestKey];
+    }
+
+    return storage; 
 }
+
+
 
 var genderCount = function(array) {
    let counts = {
