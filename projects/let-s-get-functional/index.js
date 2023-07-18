@@ -69,7 +69,9 @@ var youngestCustomer = function(array){
     return youngestCustomer.name;
 }
 // skip average balance 
-var averageBalance;
+var averageBalance = function(array, number){
+
+}
 
 var firstLetterCount = function(array, letter){
     let count = 0;
@@ -139,7 +141,23 @@ var friendsCount = function(array, name){
 }
 
 var topThreeTags = function(array){
+  
+    // storage object to hold top three tags
+    let countObj = {
     
+    }
+
+    for(let i = 0; i < array.length; i++){ // looping through customers array 
+        for(let j = 0; j < array[i].tags.length; j++){ // looping through each customers tags array
+            // use hasOwnProperty to update our empty count object with current customers tags
+            if(!countObj.HasOwnProperty(array[i].tags[j])){  // check if the tag is in the object
+                countObj[array[i].tags[j]] = 1 // 
+            } else {
+                countObj[array[i].tags[j]]++ // updating count object with tags found in customers array
+            }
+        }
+    }
+    return countObj;
 }
 
 var genderCount = function(array) {
